@@ -45,12 +45,13 @@
 
 .messages{
   color: #510405;
-  font-size: x-large;
+  font-size: larger;
   -webkit-box-flex:0;
   -ms-flex:0 0 50%;
   flex:0 0 50%;
-  max-width:70%;
-  
+  max-width:50%
+  border: 1px solid #d91e1e;
+  border-radius: 5px 5px;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
@@ -78,11 +79,6 @@ h3 {
   /*font-family: 'Pacifico', cursive;*/
   font-family: Arial;	
   color:#212121;
-}
-
-
-[data-toggle]:hover {
-  font-weight: bolder;
 }
 
 .rainbow {
@@ -188,10 +184,10 @@ function validateForm() {
     {% endwith %}
   </div>
   <form name="medusa2" method="post" action="/" enctype="multipart/form-data">
-		<h3><table style="width:1000px;height: 40%;">
+		<h3><table width="1000px">
 	 		<tbody>
 	  			<tr>
-					<td style="width:170px"><label for="target">Select a target file:</label> </td>
+					<td style="width:130px><label for="target">Select a target file:</label> </td>
 					<td style="width:170px"><input type="file" class="button" id="target" name="target" required> </td> 
 					<td rowspan="8" align="center">	
 	       <img src="../static/medusa2.png" width="320" height="320"alt="" border="0"/>  
@@ -225,7 +221,6 @@ function validateForm() {
 				</tr> 
         -->
         <br> <br>
-        <!---->
         <tr>
           <td>
             <label for ="aligning_algorithm">aligning algorithm:</label></td>

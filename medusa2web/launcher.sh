@@ -1,5 +1,5 @@
 #!/bin/bash
-path="/home/tirocinio/medusa_new/medusa2/medus2web/results/"
+path="/home/desk/Desktop/TestWebApp/results/"
 input_file=$1
 output_folder=$2
 n_run=$3
