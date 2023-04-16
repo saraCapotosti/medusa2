@@ -130,10 +130,16 @@ def upload_file():
         sequence=0
         found_new_line = 0
         list_id.clear()
+        count_line = 0
         if(target_filename.find('.gz')>-1):
             with gzip.open(target,"rt") as file:
                 for line in file.readlines():
+                        count_line=count_line+1
                         if  found_new_line ==1:
+                            if line[0]== ">":
+                                flash(u'Something went wrong with your target genome: empty sequence found',
+                                        'danger')
+                                return redirect(url_for('index'))
                             if line[0]== ">":
                                 flash(u'Something went wrong with your target genome: empty sequence found',
                                         'danger')
@@ -158,10 +164,14 @@ def upload_file():
                                     flash(u'Something went wrong with your target genome::one or more sequences contain non DNA characters',
                                             'danger')
                                     return redirect(url_for('index'))
+                if count_line == 1:
+                        flash(u'Something went wrong with your target genome: file empty',
+                                'danger')
         else:
             try:
                 with open(target,"r") as file:
                     for line in file.readlines():
+                        count_line=count_line+1
                         if  found_new_line ==1:
                             if line[0]== ">":
                                 flash(u'Something went wrong with your target genome: empty sequence found',
@@ -187,6 +197,10 @@ def upload_file():
                                     flash(u'Something went wrong with your target genome:one or more sequences contain non DNA characters',
                                             'danger')
                                     return redirect(url_for('index'))
+                    if count_line == 1:
+                        flash(u'Something went wrong with your target genome: file empty',
+                                'danger')
+                        return redirect(url_for('index'))
             except Exception as e:
                 print(e)
                 flash(u'unrecognized compression type, please use GZIP for deflating your files',
@@ -207,9 +221,11 @@ def upload_file():
             sequence=0
             found_new_line = 0
             list_id.clear()
+            count_line=0
             if(currentRef.filename.find('.gz')>-1):
                 with gzip.open(current_reference,"rt") as file:
                     for line in file.readlines():
+                            count_line=count_line+1
                             if  found_new_line ==1:
                                 if line[0]== ">":
                                     flash(u'Something went wrong with your reference genome: empty sequence found',
@@ -235,11 +251,16 @@ def upload_file():
                                         flash(u'Something went wrong with your reference genome: one or more sequences contain non DNA characters',
                                                 'danger')
                                         return redirect(url_for('index'))
+                    if count_line == 1:
+                        flash(u'Something went wrong with your reference genome: file empty',
+                                'danger')
+                        return redirect(url_for('index'))
             else:
                 try:
                     with open(current_reference,"r") as file:
                         for line in file.readlines():
                             if  found_new_line ==1:
+                                count_line=count_line+1
                                 if line[0]== ">" :
                                     flash(u'Something went wrong with your reference genome: empty sequence found',
                                             'danger')
@@ -264,6 +285,10 @@ def upload_file():
                                         flash(u'Something went wrong with your reference genome: one or more sequences contain non DNA characters',
                                                 'danger')
                                         return redirect(url_for('index'))
+                        if count_line == 1:
+                            flash(u'Something went wrong with your reference genome: file empty',
+                                    'danger')
+                            return redirect(url_for('index'))
                     
                 except Exception as e:
                     flash(u'unrecognized compression type, please use GZIP for deflating your files',
