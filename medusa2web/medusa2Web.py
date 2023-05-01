@@ -140,10 +140,6 @@ def upload_file():
                                 flash(u'Something went wrong with your target genome: empty sequence found',
                                         'danger')
                                 return redirect(url_for('index'))
-                            if line[0]== ">":
-                                flash(u'Something went wrong with your target genome: empty sequence found',
-                                        'danger')
-                                return redirect(url_for('index'))
                         if line[0]== ">":
                             found_new_line =1
                             id = checkId(line)
